@@ -2,7 +2,7 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 body {
-  background: url("pictures/wall.png") no-repeat center center fixed Highlight;
+  background-color: rgba(255,255,255, 0.9);
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

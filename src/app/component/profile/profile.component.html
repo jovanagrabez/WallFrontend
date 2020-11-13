@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class=" col-sm-5 container" xmlns="http://www.w3.org/1999/html">
+  <div class="d-flex w-80 ">
+    <h6 class="mb-2">{{info.username}}</h6>
+  </div>
+  <div >
+    <textarea  style="width:100%;"[(ngModel)]="newPost.text" placeholder="Enter your post here..."></textarea>
+  </div>
+  <div style="position: relative;left:0;bottom:0" >
+    <button type="submit"  (click)="addPost()" class="btn btn-primary pull-right ">
+      <i></i>
+      Save
+    </button>
+    <button type="submit" class="btn btn-primary pull-right">
+      <i></i>
+      Cancel
+    </button>
+  </div>
+  <br>
+  <br>
+
+  <div  id="posts">
+    <h3>Post</h3>
+    <br><br>
+    <div *ngFor="let post of allPosts">
+      <div>
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+
+          <div class="d-flex w-80 justify-content-between">
+            <h5 class="mb-2">{{post['author'].username}}</h5>
+          </div>
+          <div>
+            <h6>{{post['date']}} {{post['time']}}</h6>
+
+          </div>
+          <div  style="position: absolute;right:0;top:0">
+            <button *ngIf="post.editable" (click)="editPost(post)" class="mybtn"><i class="fa fa-save"></i></button>
+            <button (click)="post.editable=true" class="mybtn"><i class="fa fa-pencil"></i></button>
+            <button (click)="deletePost(post['id'])" class="mybtn"><i class="fa fa-trash"></i></button>
+          </div>
+          <span *ngIf="!post.editable" >
+            <span >
+              {{post['text']}}
+            </span>
+          </span>
+
+          <div *ngIf="post.editable">
+            <textarea [(ngModel)]="post.text" >  {{post['text']}} </textarea>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

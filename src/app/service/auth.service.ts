@@ -19,6 +19,6 @@ export class AuthService {
 
   // @ts-ignore
   attemptAuth(credentials: User): Observable {
-    return this.http.post('http://localhost:8080/users/login', credentials, httpOptions);
+    return this.http.post('api/users/login', credentials, httpOptions);
   }
 }

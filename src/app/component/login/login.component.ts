@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
       data => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUsername(data.username);
-        console.log('LALALAL' + this.tokenStorage.getToken());
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.toastr.success('You are logged in', 'Success');
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
       error => {
         this.toastr.error('Your useraname or password is incorect', 'Error' );
         this.isLoginFailed = true;
-        this.router.navigate(['register']);
+        this.router.navigate(['login']);
       }
     );
   }

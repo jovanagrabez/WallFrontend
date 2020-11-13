@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
   register() {
     if (this.repassword === this.user.password) {
       this.userService.register(this.user).subscribe(value => {
-        this.router.navigate(['home']);
+        this.router.navigate(['login']);
         this.toastr.success('Success, you are registered', 'Succes');
       }, error => {
         this.toastr.error('Error, username already exists!', 'Error');

@@ -11,10 +11,10 @@ export class UserService {
 
 
   register(user): any {
-    return this.http.post('http://localhost:8080/users/register', user);
+    return this.http.post('/api/users/register', user);
 
   } login(user): any {
-    return this.http.post('http://localhost:8080/users/login', user);
+    return this.http.post('/api/users/login', user);
 
   }
 }
