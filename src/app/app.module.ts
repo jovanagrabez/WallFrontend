@@ -13,6 +13,7 @@ import {ToastrModule} from 'ngx-toastr';
 import { HomeComponent } from './component/home/home.component';
 import {httpInterceptorProviders} from './auth/auth-interceptor';
 import { ProfileComponent } from './component/profile/profile.component';
+import { CommentComponent } from './component/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     NavbarComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    CommentComponent
   ],
   imports: [
     BrowserModule,

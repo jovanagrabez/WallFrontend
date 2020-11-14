@@ -6,4 +6,6 @@ export class FullPosts {
   date: string;
   time: string;
   editable = false;
+  comments: any;
+  showComments = false;
 }

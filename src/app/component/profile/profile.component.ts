@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  onLoad(){
+  onLoad() {
     this.newPost.username = this.token.getUsername();
     this.postService.allPostsByUser(this.token.getUsername()).subscribe(posts => {
       this.allPosts = posts;

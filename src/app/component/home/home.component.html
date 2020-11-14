@@ -1,39 +1,113 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <div class=" col-sm-5 container">
   <div class="d-flex w-80 ">
     <h6 class="mb-2">{{info.username}}</h6>
   </div>
-    <div >
-    <textarea  style="width:100%;"[(ngModel)]="newPost.text" placeholder="Enter your post here..."></textarea>
-    </div>
-<div style="position: relative;left:0;bottom:0" >
-  <button type="submit"  (click)="addPost()" class="btn btn-primary ">
-    <i></i>
-     Save
-  </button>
-  <button type="submit" class="btn btn-primary pull-right">
-    <i></i>
-    Cancel
-  </button>
-</div>
-<br>
+  <div>
+    <textarea style="width:100%;" [(ngModel)]="newPost.text" placeholder="Enter your post here..."></textarea>
+  </div>
+  <div style="position: relative;left:0;bottom:0">
+    <button type="submit" (click)="addPost()" class="btn btn-primary ">
+      <i></i>
+      Save
+    </button>
+    <button type="submit" class="btn btn-primary pull-right">
+      <i></i>
+      Cancel
+    </button>
+  </div>
+  <br>
   <br>
 
-<div  id="posts">
-  <h3>Post</h3>
-  <br><br>
-  <div *ngFor="let post of allPosts">
-    <div>
-      <div class="list-group-item list-group-item-action flex-column align-items-start">
+  <div id="posts">
+    <h3>Post</h3>
+    <br><br>
+    <div *ngFor="let post of allPosts">
+      <div>
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
 
-        <div class="d-flex w-80 justify-content-between">
-          <h5 class="mb-2">{{post['author'].username}}</h5>
-        </div>
-        <div>
-          <h6>{{post['dateAndTime']}}</h6>
-        </div>
-        <span>
-            <span >
+          <div class="d-flex w-80 justify-content-between">
+            <h4 class="mb-2">{{post['author'].username}}</h4>
+          </div>
+          <div>
+            <p>{{post['date']}}  {{post['time']}}</p>
+          </div>
+          <span>
+            <span>
               {{post['text']}}
             </span>
           </span>
+          <div>
+            <a (click)="showOrHide()">{{post['comments'].length}} comments</a>
+          </div>
+
+          <div  style="position: absolute;right:0;top:0">
+            <button  (click)="isAddComment=true" class="mybtn"><i class="fa fa-plus-circle"></i></button>
+          </div>
+
+          <div *ngIf="showComments">
+
+
+            <div *ngFor="let comment of post.comments">
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+
+                  <div class="d-flex w-80 justify-content-between">
+                    <p class="mb-2">{{comment['author'].username}}</p>
+                    <button *ngIf="comment['author'].username == post['author'].username" class="mybtn"><i class="fa fa-user"></i></button>
+
+                  </div>
+                  <div>
+                    <p>{{comment['date']}}  {{comment['time']}}</p>
+                  </div>
+                  <span>
+            <span *ngIf="!comment.editable" >
+              {{comment['text']}}
+            </span>
+          </span>
+
+                  <div  style="position: absolute;right:0;top:0">
+                    <button *ngIf="info.username==comment['author'].username" (click)="comment.editable=true" class="mybtn"><i class="fa fa-pencil"></i></button>
+                    <button *ngIf="info.username==post['author'].username" (click)="deleteComment(comment,post.id)" class="mybtn"><i class="fa fa-trash"></i></button>
+                  </div>
+
+
+                  <div *ngIf="comment.editable">
+                    <textarea [(ngModel)]="comment.text">  {{comment['text']}} </textarea>
+                    <button (click)="editComment(comment)" class="mybtn"><i class="fa fa-check-circle">Save</i></button>
+                    <button class="mybtn"><i class="fa fa-trash">Cansel</i></button>
+
+                  </div>
+
+
+                  <div>
+                  </div>
+                </div>
+              </div>
+
+
+          </div>
+          <div *ngIf="isAddComment">
+            <div >
+              <textarea style="width:100%;" [(ngModel)]="newComment.text" placeholder="Enter your comment here..."></textarea>
+            </div>
+            <div style="position: relative;left:0;bottom:0">
+              <button type="submit" (click)="addComment(post.id)" class="btn btn-primary ">
+                <i></i>
+                Save
+              </button>
+              <button type="submit" class="btn btn-primary pull-right">
+                <i></i>
+                Cancel
+              </button>
+            </div>
+          </div>
+            </div>
+
+          <br>
+          <br>
+        </div>
       </div>
+    </div>
+  </div>
+

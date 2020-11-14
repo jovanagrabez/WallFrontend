@@ -1,0 +1,34 @@
+<!--<div  id="comments">-->
+  <!--<h3>Post</h3>-->
+  <!--<br><br>-->
+  <!--<div *ngFor="let comment of allComments">-->
+    <!--<div>-->
+      <!--<div class="list-group-item list-group-item-action flex-column align-items-start">-->
+
+        <!--<div class="d-flex w-80 justify-content-between">-->
+          <!--<h5 class="mb-2">username</h5>-->
+        <!--</div>-->
+        <!--<div>-->
+          <!--<h6>datum i vrijeme</h6>-->
+
+        <!--</div>-->
+        <!--<div  style="position: absolute;right:0;top:0">-->
+          <!--<button *ngIf="post.editable" (click)="editPost(post)" class="mybtn"><i class="fa fa-save"></i></button>-->
+          <!--<button (click)="post.editable=true" class="mybtn"><i class="fa fa-pencil"></i></button>-->
+          <!--<button (click)="deletePost(post['id'])" class="mybtn"><i class="fa fa-trash"></i></button>-->
+        <!--</div>-->
+        <!--<span *ngIf="!post.editable" >-->
+            <!--<span >-->
+              <!--{{post['text']}}-->
+            <!--</span>-->
+          <!--</span>-->
+
+        <!--<div *ngIf="post.editable">-->
+          <!--<textarea [(ngModel)]="post.text" >  {{post['text']}} </textarea>-->
+
+        <!--</div>-->
+
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->

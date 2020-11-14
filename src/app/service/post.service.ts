@@ -5,9 +5,7 @@ var headers_object = new HttpHeaders();
 headers_object.append('Content-Type', 'application/json');
 headers_object.append('Authorization', 'Bearer ' + sessionStorage.getItem('AuthToken'));
 
-const httpOptions = {
-  headers: headers_object
-};
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,4 +30,21 @@ export class PostService {
   editPost(post): any {
     return this.http.put('/api/posts/edit', post);
   }
+  addComments(comment) {
+    return this.http.post('/api/comments/add', comment);
+  }
+  editComments(comment): any{
+    return this.http.put('/api/comments/edit', comment);
+
+  }
+
+  deleteComment(comment): any {
+    const httpOptions = {
+      body: comment
+  };
+
+    // @ts-ignore
+    return this.http.delete('/api/comments/delete', httpOptions);
+  }
+
 }
