@@ -34,7 +34,7 @@ import { CommentComponent } from './component/comment/comment.component';
     ToastrModule.forRoot()
 
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

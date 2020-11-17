@@ -7,5 +7,5 @@ export class Comment {
   time: string;
   dateAndTime: string;
   editable = false;
-
+  isAddComment = false;
 }

@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {FullPosts} from '../../model/FullPosts';
 import {Comment} from '../../model/Comment';
+import {AppComponent} from '../../app.component';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +18,16 @@ export class HomeComponent implements OnInit {
   info: any;
   newPost: Post = new Post();
   newComment: Comment = new Comment();
+  editedComment: Comment = new Comment();
+
   allPosts: FullPosts[];
   date: string[];
   time: string[];
   showComments = false;
-  isAddComment = false;
+//  isAddComment = false;
 
 
-  constructor(private token: TokenStorageService, private postService: PostService, private toastr: ToastrService) {
+  constructor(private token: TokenStorageService, private postService: PostService, private toastr: ToastrService, private app: LoginComponent) {
   }
 
   ngOnInit() {
@@ -40,17 +44,18 @@ export class HomeComponent implements OnInit {
       res => {
         this.toastr.success('Your post is successfully added', 'Success');
         this.onLoad();
+        this.sendMessage();
         this.newPost.text = '';
       }, error => {
         this.toastr.error('Something is not right', 'Error');
       });
   }
 
-  showOrHide() {
-    if (!this.showComments) {
-      this.showComments = true;
+  showOrHide(post) {
+    if (!post.showComments) {
+      post.showComments = true;
     } else {
-      this.showComments = false;
+      post.showComments = false;
     }
   }
 
@@ -87,6 +92,7 @@ export class HomeComponent implements OnInit {
 
 
   editComment(comment) {
+    comment.text = this.editedComment.text;
     this.postService.editComments(comment).subscribe(
       res => {
         this.toastr.success('Your comment is successfully edited', 'Success');
@@ -114,4 +120,8 @@ export class HomeComponent implements OnInit {
           });
       }
     }
+
+  sendMessage() {
+    this.app.sendMessage();
+  }
 }

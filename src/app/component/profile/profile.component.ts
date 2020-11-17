@@ -4,6 +4,7 @@ import {FullPosts} from '../../model/FullPosts';
 import {TokenStorageService} from '../../service/token-storage.service';
 import {PostService} from '../../service/post.service';
 import {ToastrService} from 'ngx-toastr';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-profile',
@@ -77,9 +78,19 @@ export class ProfileComponent implements OnInit {
         this.allPosts[i].date =  this.allPosts[i].dateAndTime.split('T', 1);
         // @ts-ignore
         this.allPosts[i].time = this.allPosts[i].dateAndTime.slice(11, 19);
-   //     this.allPosts[i].dateAndTime = this.date[0].concat('  ' + this.time[0]);
+
+        const a = moment(new Date());
+        const b = moment(Date.parse(this.allPosts[i].dateAndTime));
+        if(a.diff(b, 'minutes') <= 5) {
+          this.allPosts[i].editable = true;
+        }
       }
     });
+
+  }
+
+  clickEdit(post: FullPosts) {
+    post.clickedEdited = true;
 
   }
 }

@@ -8,4 +8,6 @@ export class FullPosts {
   editable = false;
   comments: any;
   showComments = false;
+  isAddComment = false;
+  clickedEdited = false;
 }

@@ -5,6 +5,8 @@ import {AuthService} from '../../service/auth.service';
 import {TokenStorageService} from '../../service/token-storage.service';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +17,14 @@ export class LoginComponent implements OnInit {
 
   isLoggedIn = false;
   isLoginFailed = false;
+  private serverUrl = 'http://localhost:8080/socket'
+  public stompClient;
   user: User = new User();
   constructor(private userService: UserService, private authService: AuthService, private tokenStorage: TokenStorageService,
-              private router: Router, private toastr: ToastrService) { }
+              private router: Router, private toastr: ToastrService) {
+    this.initializeWebSocketConnection(this.toastr);
+
+  }
 
   ngOnInit() {
 
@@ -44,4 +51,25 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+
+  initializeWebSocketConnection(toastr){
+    let ws = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(ws);
+    let that = this;
+    this.stompClient.connect({}, function(frame) {
+      that.stompClient.subscribe('/message', (message:any) => {
+        if (message.body) {
+            toastr.success(message.body, 'Success');
+        }
+      });
+    });
+  }
+
+
+  sendMessage() {
+    this.stompClient.send('/app/send/message' , {}, 'Have some new post, check it');
+  }
+
+
 }

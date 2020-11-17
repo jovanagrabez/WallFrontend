@@ -1,5 +1,4 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <div class=" col-sm-5 container">
   <div class="d-flex w-80 ">
     <h6 class="mb-2">{{info.username}}</h6>
@@ -39,14 +38,14 @@
             </span>
           </span>
           <div>
-            <a (click)="showOrHide()">{{post['comments'].length}} comments</a>
+            <a (click)="showOrHide(post)">{{post['comments'].length}} comments</a>
           </div>
 
           <div  style="position: absolute;right:0;top:0">
-            <button  (click)="isAddComment=true" class="mybtn"><i class="fa fa-plus-circle"></i></button>
+            <button  (click)="post.isAddComment=true" class="mybtn"><i class="fa fa-plus-circle"></i></button>
           </div>
 
-          <div *ngIf="showComments">
+          <div *ngIf="post.showComments">
 
 
             <div *ngFor="let comment of post.comments">
@@ -73,9 +72,9 @@
 
 
                   <div *ngIf="comment.editable">
-                    <textarea [(ngModel)]="comment.text">  {{comment['text']}} </textarea>
+                    <textarea [(ngModel)]="editedComment.text">  {{comment['text']}} </textarea>
                     <button (click)="editComment(comment)" class="mybtn"><i class="fa fa-check-circle">Save</i></button>
-                    <button class="mybtn"><i class="fa fa-trash">Cansel</i></button>
+                    <button  (click)="comment.editable = false" class="mybtn"><i class="fa fa-trash">Cansel</i></button>
 
                   </div>
 
@@ -87,7 +86,7 @@
 
 
           </div>
-          <div *ngIf="isAddComment">
+          <div *ngIf="post.isAddComment">
             <div >
               <textarea style="width:100%;" [(ngModel)]="newComment.text" placeholder="Enter your comment here..."></textarea>
             </div>
@@ -96,7 +95,7 @@
                 <i></i>
                 Save
               </button>
-              <button type="submit" class="btn btn-primary pull-right">
+              <button type="reset" (click)="post.isAddComment=false" class="btn btn-primary pull-right">
                 <i></i>
                 Cancel
               </button>

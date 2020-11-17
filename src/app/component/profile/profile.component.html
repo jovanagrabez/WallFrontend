@@ -35,17 +35,17 @@
 
           </div>
           <div  style="position: absolute;right:0;top:0">
-            <button *ngIf="post.editable" (click)="editPost(post)" class="mybtn"><i class="fa fa-save"></i></button>
-            <button (click)="post.editable=true" class="mybtn"><i class="fa fa-pencil"></i></button>
+            <button *ngIf="post.clickedEdited" (click)="editPost(post)" class="mybtn"><i class="fa fa-save"></i></button>
+            <button *ngIf="post.editable"   (click)="clickEdit(post)" class="mybtn"><i class="fa fa-pencil"></i></button>
             <button (click)="deletePost(post['id'])" class="mybtn"><i class="fa fa-trash"></i></button>
           </div>
-          <span *ngIf="!post.editable" >
+          <span *ngIf="!post.clickedEdited" >
             <span >
               {{post['text']}}
             </span>
           </span>
 
-          <div *ngIf="post.editable">
+          <div *ngIf="post.clickedEdited">
             <textarea [(ngModel)]="post.text" >  {{post['text']}} </textarea>
 
           </div>
