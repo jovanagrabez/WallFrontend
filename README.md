@@ -1,6 +1,16 @@
 # Wallfrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.22.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
+
+#Install
+ npm install --save bootstrap
+ npm install ngx-toastr --save
+npm install @angular/animations --save
+npm install moment --save  
+npm install stompjs;
+npm install sockjs-client
+npm i net -S
+
 
 ## Development server
 
