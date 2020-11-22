@@ -12,3 +12,23 @@
 .mybtn:hover {
   background-color: #eae7d0;
 }
+
+
+
+
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: #0275d8;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #0275d8;
+}

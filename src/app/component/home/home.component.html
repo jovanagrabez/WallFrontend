@@ -26,9 +26,19 @@
       <div>
         <div class="list-group-item list-group-item-action flex-column align-items-start">
 
-          <div class="d-flex w-80 justify-content-between">
+          <div class="d-flex  justify-content-between">
             <h4 class="mb-2">{{post['author'].username}}</h4>
+
           </div>
+          <ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+  </span>
+          </ng-template>
+
+          <ngb-rating [max]="5" [(rate)]="post.average" (rateChange)="rate(post,post.id)" [starTemplate]="t" [readonly]="false"></ngb-rating>
+
+
           <div>
             <p>{{post['date']}}  {{post['time']}}</p>
           </div>

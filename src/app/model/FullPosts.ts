@@ -10,4 +10,6 @@ export class FullPosts {
   showComments = false;
   isAddComment = false;
   clickedEdited = false;
+  average: number;
+  numberR: number;
 }

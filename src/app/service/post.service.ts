@@ -47,4 +47,10 @@ export class PostService {
     return this.http.delete('/api/comments/delete', httpOptions);
   }
 
+  addRating(post, id): any {
+    return this.http.post('/api/posts/ratePost/'.concat(id), post);
+
+  }
+
+
 }

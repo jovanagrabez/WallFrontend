@@ -14,6 +14,8 @@ import { HomeComponent } from './component/home/home.component';
 import {httpInterceptorProviders} from './auth/auth-interceptor';
 import { ProfileComponent } from './component/profile/profile.component';
 import { CommentComponent } from './component/comment/comment.component';
+import {StarRatingConfigService, StarRatingModule} from 'angular-star-rating';
+import {NgbRatingModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -28,13 +30,15 @@ import { CommentComponent } from './component/comment/comment.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    StarRatingModule,
+    NgbRatingModule,
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot()
 
   ],
-  providers: [httpInterceptorProviders, LoginComponent],
+  providers: [httpInterceptorProviders, LoginComponent, StarRatingConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

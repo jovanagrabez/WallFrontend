@@ -8,6 +8,9 @@ import {FullPosts} from '../../model/FullPosts';
 import {Comment} from '../../model/Comment';
 import {AppComponent} from '../../app.component';
 import {LoginComponent} from '../login/login.component';
+import {StarRatingComponent} from 'ng-starrating';
+import {Rating} from '../../model/Rating';
+
 
 @Component({
   selector: 'app-home',
@@ -23,14 +26,14 @@ export class HomeComponent implements OnInit {
   allPosts: FullPosts[];
   date: string[];
   time: string[];
-  showComments = false;
-//  isAddComment = false;
+  rating: Rating = new Rating();
 
 
   constructor(private token: TokenStorageService, private postService: PostService, private toastr: ToastrService, private app: LoginComponent) {
   }
 
   ngOnInit() {
+
 
     this.info = {
       token: this.token.getToken(),
@@ -76,6 +79,7 @@ export class HomeComponent implements OnInit {
     this.newPost.username = this.token.getUsername();
     this.postService.allPosts().subscribe(posts => {
       this.allPosts = posts;
+      console.log(this.allPosts)
       for (let i = 0; i < this.allPosts.length; i++) {
         // @ts-ignore
         this.allPosts[i].date = this.allPosts[i].dateAndTime.split('T', 1);
@@ -108,20 +112,33 @@ export class HomeComponent implements OnInit {
 
 
   deleteComment(comment, post) {
-      comment.postId = post;
-      if (window.confirm('Are sure you want to delete this comment')) {
-        this.postService.deleteComment(comment).subscribe(
-          res => {
-            this.onLoad();
-            this.toastr.success('Your post is successfully deleted', 'Success');
-            window.location.reload();
-          }, error => {
-            this.toastr.error('Something is not right', 'Error');
-          });
-      }
+    comment.postId = post;
+    if (window.confirm('Are sure you want to delete this comment')) {
+      this.postService.deleteComment(comment).subscribe(
+        res => {
+          this.onLoad();
+          this.toastr.success('Your post is successfully deleted', 'Success');
+          window.location.reload();
+        }, error => {
+          this.toastr.error('Something is not right', 'Error');
+        });
     }
+  }
 
   sendMessage() {
     this.app.sendMessage();
+  }
+
+
+  rate(post, id) {
+    this.rating.username = this.token.getUsername();
+    this.rating.post = post;
+    this.rating.rate = post.average;
+    this.postService.addRating(this.rating, id).subscribe(
+      res => {
+        this.toastr.success('Your post is successfully rated', 'Success');
+      }, error => {
+        this.toastr.error('Something is not right', 'Error');
+      });
   }
 }
